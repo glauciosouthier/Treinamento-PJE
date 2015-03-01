@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"> 
+  <base target="_blank"> 
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+<aside class="note">
+	<section>
+  <p>Clicar <code><a href="?presentme=true" target="_self">?presentme=true</a></code> Para ativar o modo de apresentação</p>
+      <p>Alterar <code><a href="?presentme=false" target="_self">?presentme=false</a></code> Para desabilitar.</p>
+	</section>
+</aside>
+    <article class="flexbox vcenter">
+      <span><img src="images/Logo_cjf.png" style="width:500px;height:500px;"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/Logo_cjf.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2 >Agenda</h2>
+    </hgroup>
+
+	<article>
+
+   <ul>
+    <li>Construção de um fluxo para testes;</li>
+    <li>Construção de um CRUD na arquitetura antiga;</li>
+    <li>Construção de um CRUD na arquitetura intermediária;</li>
+    <li>Construção de um CRUD na arquitetura nova;</li>
+    </ul>
+	</article>
+  </slide>
+<style>
+
+#backImgSlideFlow {
+	background-image: url(images/BPMN-2.0-SIMLE-Class-Example.jpg);
+ }
+ 
+</style>
+  <!--slide class="fill nobackground" id="backImgSlideFlow"-->
+   <slide>
+    <hgroup>
+      <h2 class="green">Construção de um fluxo para testes</h2>
+    </hgroup>
+  <article>
+    <article style="float: right;">
+		      <img src="images/BPMN-2.0-SIMLE-Class-Example.jpg" alt="Description" title="Description"  style="width:500px;height:500px;">
+		   </article>
+          <ul class="black">
+            <li>O PJE é um sistema baseado em Workflow;</li>
+            <li>Utiliza a implementação JBPM 3.2 e linguagem JPDL<br/>(jBPM Process Definition Language);</li>
+			<li>Necessidade: aceitar fluxos diretamente em linguagem BPMN 2<br/>(Business Process Model and Notation 2.0)</li>
+            <li>Tendência: migração para JBPM 5</li>
+			<li>Alternativa: Bonita BPM 6 <br/>(http://www.bonitasoft.com)</li>
+          </ul>
+    </article>
+  </slide>
+<style>
+.noBullet ul > li:before {
+  content: none;
+}
+</style>
+  <slide>
+    <hgroup>
+      <h2>Criação do subprocesso:</h2>
+    </hgroup>
+    <article>
+          <ul>
+                <li>Logar com perfil Administrador;</li>
+                <li>No menu <b>"Configuração->Sistema->Fluxo"</b>, aba <b>"Formulário"</b>, criar o fluxo <b>"TreinamentoCJF"</b>;</li>
+                <li>Marcar <b>Publicado</b>, colocar a data atual no campo <b>"Publicado em"</b> e salvar;</li>
+                <li>Editar o fluxo TreinamentoCJF:</li>
+				<li class="noBullet">Na aba <b>"Propriedades"</b> criar a raia <b>"secretaria"</b> adicionando:</li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;a) Servidores da Secretaria -> Servidor</li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;b) Direção de secretaria -> Diretor de Secretaria</li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;c) Servidores da Secretaria -> Diretor de Secretaria</li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;d) Servidores da Secretaria -> Estagiário</li>
+				<li>Gravar;</li>
+          </ul>
+    </article>
+  </slide>
+
+<slide>
+    <hgroup>
+      <h2>Criação do subprocesso:</h2>
+    </hgroup>
+    <article>
+			<ul>
+			<article class="build"> 
+            <li>Na aba "Nós" criar o nó "Cadastro Contatos" 
+              <ul>
+                <li>Posicionado entre o nó "Início" e o nó "Término";</li>
+                <li>Criar a tarefa "Cadastrar Contatos" e atribuir  à raia "secretaria";</li>
+                <li>Obs: isso irá garantir que ao abrir a tarefa o processo apareça na caixa dos interessados.</li>
+				<li>Gravar;</li>
+              </ul>
+            </li>
+			</article>
+          <article class="build"> 
+            <li>Criar a variável "Processo_Fluxo_visualizarDecisao"  com o tipo frame;
+              <ul>
+                <li>Obs: isso refletirá a inclusão do arquivo "/Processo/Fluxo/visualizarDecisao.xhtml" que exibe as decisões proferidas no processo (se houver).</li>
+              </ul>
+            </li>
+          </article>
+          </ul>
+    </article>
+  </slide>
+<slide>
+    <hgroup>
+         <h2>Criação do subprocesso:</h2>
+    </hgroup>
+			
+			<article class="build"> 
+			<ul>
+            <li>Na caixa “Eventos”, evento "Entrar no nó", criar uma ação com a seguinte EL:
+			<ul>
+			<li>#{taskInstanceUtil.setFrameDefaultTransition('Término')}</li>
+			<li>Obs: isso irá garantir que não haja transição automática para o nó de desvio caso este seja o primeiro da lista.</li>
+			<li>Marcar para ocultar as transições para os nós de desvio;</li>
+			<li>Gravar e Publicar</li>
+			</ul>
+            </li>
+			</ul>
+          </article> 
+          
+       <article class="build">
+          <img src="images/menu-sistjweb.png" alt="Description" title="Description"  style="align:center;width:700px;height:500px;">
+       </article>
+  </slide>
+<slide>
+    <hgroup>
+      <h2>Como fazer (Menu universal)</h2>
+    </hgroup>
+       <article style="align: center;">
+        <iframe src="components/tjdft-botao-menu-sistemas/" style="height:500px;"></iframe>
+       </article>
+  </slide>
+<slide>
+    <hgroup>
+      <h2>Como fazer (Barra universal)</h2>
+    </hgroup>
+       <article style="align: center;">
+        <iframe src="components/tjdft-menu/" style="height:500px;"></iframe>
+       </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Como fazer (Barra universal - Intranet)</h2>
+    </hgroup>
+       <article style="align: center;">
+        <iframe src="components/tjdft-menu/intranet.html" style="height:500px;"></iframe>
+       </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Como fazer (Barra universal - Certidão)</h2>
+    </hgroup>
+       <article style="align: center;">
+        <iframe src="components/tjdft-menu/certidao.html" style="height:500px;"></iframe>
+       </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Como fazer (Menu universal - Cartões de Notificação)</h2>
+    </hgroup>
+       <article class="flexbox vcenter auto-fadein">
+          <img src="images/Cartao.png" alt="Description" title="Description"  style="align:center">
+       </article>     
+  </slide>
+    <slide>
+    <hgroup>
+      <h2>Como fazer (Notificações - Ícone categorizador)</h2>
+    </hgroup>
+       <article class="flexbox vcenter auto-fadein">
+          <img src="images/CartaoIdentificadorDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
+       </article>    
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Como fazer (Notificações - Assunto)</h2>
+    </hgroup>
+       <article class="flexbox vcenter auto-fadein">
+          <img src="images/CartaoAssuntoDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
+       </article>    
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Como fazer (Notificações - Detalhe Assunto)</h2>
+    </hgroup>
+       <article class="flexbox vcenter auto-fadein">
+          <img src="images/CartaoDetalheDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
+       </article>    
+  </slide> 
+  <slide>
+    <hgroup>
+      <h2>Como fazer (Notificações - Ações)</h2>
+    </hgroup>
+       <article class="flexbox vcenter auto-fadein">
+          <img src="images/CartaoBotoesDeAcaoDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
+       </article>    
+  </slide>
+  <slide>
+    <aside class="note">
+  <section>
+  <p>Comunicação por cores, texto e aspecto</p>
+  </section>
+</aside>
+    <hgroup>
+      <h2>Como fazer (Notificações - Cores)</h2>
+    </hgroup>
+    <article style="float:left">
+     <ul>
+          <li class="red3">Atenção imediata</li>
+          <li class="yellow">Alerta</li>
+           <li class="blue3">Pessoal</li>
+          <li class="green2">Finanças</li>
+        </ul>
+      </article>
+      <br>
+       <article class="flexbox fauto-fadein">
+          <img src="images/CartaoCoresDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
+       </article>    
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Integração horizontal</h2>
+    </hgroup>
+    <article>
+      
+       <article style="float: right;">
+          <img src="images/user-experience.jpg" alt="Description" title="Description"  style="width:500px;height:500px;">
+       </article>
+          <ul>
+                <li>serviços, dados e objetos na mesma camada;</li>
+                <li>abstração de bibliotecas e versões;</li>
+                <li>deploys automágicos.</li>
+          </ul>
+
+ <!-- http://blogs-images.forbes.com/steveolenski/files/2014/11/user-experience.jpg -->
+    </article>
+  </slide>
+   <slide>
+    
+    <hgroup>
+      <h2>Webcomponents</h2>
+    </hgroup>
+    <article>
+      
+       <article style="float: right;">
+          <img src="http://frontend-labs.com/wp-content/uploads/2014/07/WebComponentsPolymer.png" alt="Description" title="Description"  style="width:500px;height:400px;">
+       </article>
+          <ul>
+                <li>Custom Elements;</li>
+                <li>HTML Templates;
+                <ul>
+                  <li>Interte até ser ativado</li>
+                  <li>Conteúdos não sofrerão carga(imagens,vídeos,áudio)</li>
+                  <li>Conteúdo não considerado como sendo do documento</li>
+                  <li>Podem ser inseridos em qualquer lugar</li>
+                </ul>
+
+                </li>
+                <li>Shadow DOM(árvores combinadas);</li>
+                <li>HTML Imports</li>
+          </ul>
+
+ <!-- http://blogs-images.forbes.com/steveolenski/files/2014/11/user-experience.jpg -->
+    </article>
+  </slide>
+   <slide>
+    
+    <hgroup>
+      <h2>Webcomponents - exemplo</h2>
+    </hgroup>
+    <article>
+      
+       <pre class="prettyprint " data-lang="html">
+      &lt;!DOCTYPE html>
+      &lt;html>
+      &lt;head>
+        &lt;title>Minha página principal&lt;/title>
+        &lt;script src="../components/platform/platform.js"></script>   
+        <b>&lt;!-- importando o componente web -->
+        &lt;link rel="import" href="../components/tjdft-botao-menu-sistemas.html"></b>
+      &lt;/head>
+      &lt;body>
+        <b>&lt;!-- usando o componente web -->
+        &lt;tjdft-botao-menu-sistemas>&lt;/tjdft-botao-menu-sistemas></b>
+      &lt;body>
+      &lt;/html>
+      </pre>
+
+    </article>
+  <section>
+  <p>Clicar <code><a href="components/tjdft-menu/intranet.html" target="_new">ShowCase</a></code></p>
+  </section>
+
+  </slide>
+
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/Logo_cjf.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Obrigado!&gt;</h2>
+      <p>Informações de contato.</p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/Logo_cjf.png"></span>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
