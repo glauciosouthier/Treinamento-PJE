@@ -1,5 +1,5 @@
 
-<h1><img src="images/io2012_logo.png"> HTML5 Slide Template</h1>
+<h1><img src="images/Logo_AssEmail_maior.png"> HTML5 Slide Template</h1>
 
-## Configuring the slides
-
+## Apresentação:
+https://rawgit.com/glauciosouthier/Treinamento-PJE/master/fluxo/template.html
