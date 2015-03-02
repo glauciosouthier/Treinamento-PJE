@@ -11,7 +11,24 @@
   <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
 </head>
 <body style="opacity: 0">
-
+    <style type="text/css">  
+#backImgSlideFlow {
+	background-image: url(images/BPMN-2.0-SIMLE-Class-Example.jpg);
+ }	
+.noBullet ul > li:before {
+  content: none;
+}
+.Video1
+    {
+     position:absolute;
+     top: 90px;
+     left:0px;        
+     width:100%;       
+     border:2px solid blue;
+     display:block;
+     z-index:99;
+     }
+    </style>
 <slides class="layout-widescreen">
 
   <slide class="logoslide nobackground">
@@ -51,36 +68,28 @@
     </ul>
 	</article>
   </slide>
-<style>
 
-#backImgSlideFlow {
-	background-image: url(images/BPMN-2.0-SIMLE-Class-Example.jpg);
- }
- 
-</style>
   <!--slide class="fill nobackground" id="backImgSlideFlow"-->
    <slide>
     <hgroup>
       <h2 class="green">Construção de um fluxo para testes</h2>
     </hgroup>
-  <article>
-    <article style="float: right;">
+	<article>
+	<article style="float: right;" class="build">
 		      <img src="images/BPMN-2.0-SIMLE-Class-Example.jpg" alt="Description" title="Description"  style="width:500px;height:500px;">
-		   </article>
-          <ul class="black">
+	</article>
+          <ul>
             <li>O PJE é um sistema baseado em Workflow;</li>
             <li>Utiliza a implementação JBPM 3.2 e linguagem JPDL<br/>(jBPM Process Definition Language);</li>
 			<li>Necessidade: aceitar fluxos diretamente em linguagem BPMN 2<br/>(Business Process Model and Notation 2.0)</li>
             <li>Tendência: migração para JBPM 5</li>
 			<li>Alternativa: Bonita BPM 6 <br/>(http://www.bonitasoft.com)</li>
           </ul>
+	
     </article>
+
   </slide>
-<style>
-.noBullet ul > li:before {
-  content: none;
-}
-</style>
+
   <slide>
     <hgroup>
       <h2>Criação do subprocesso:</h2>
@@ -91,33 +100,64 @@
                 <li>No menu <b>"Configuração->Sistema->Fluxo"</b>, aba <b>"Formulário"</b>, criar o fluxo <b>"TreinamentoCJF"</b>;</li>
                 <li>Marcar <b>Publicado</b>, colocar a data atual no campo <b>"Publicado em"</b> e salvar;</li>
                 <li>Editar o fluxo TreinamentoCJF:</li>
-				<li class="noBullet">Na aba <b>"Propriedades"</b> criar a raia <b>"secretaria"</b> adicionando:</li>
-				<li>&nbsp;&nbsp;&nbsp;&nbsp;a) Servidores da Secretaria -> Servidor</li>
+				<li>Clicar em "Definição"</li>
+          </ul>
+    </article>
+		<article>
+          <img src="images/fluxo_definicao.png" alt="Description" title="Description"  >
+       </article>
+  </slide>
+  
+  
+ <slide>
+    <hgroup>
+      <h2>Criação do subprocesso:</h2>
+    </hgroup>
+    <article>
+          <ul>
+				<li class="noBullet">Na aba <b>"Propriedades"</b> criar a raia <b>"Secretaria"</b> adicionando:</li>
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;b) Direção de secretaria -> Diretor de Secretaria</li>
-				<li>&nbsp;&nbsp;&nbsp;&nbsp;c) Servidores da Secretaria -> Diretor de Secretaria</li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;a) Servidores da Secretaria -> Servidor</li>
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;d) Servidores da Secretaria -> Estagiário</li>
 				<li>Gravar;</li>
           </ul>
     </article>
+	<article>
+          <img src="images/raias_secretaria.png" alt="Description" title="Description"  >
+       </article>
   </slide>
-
+  
+  
 <slide>
+    <hgroup>
+      <h2>Criação do subprocesso:</h2>
+    </hgroup>
+ 	<article> 
+		<article style="float: right;" class="build">
+          <img src="images/fluxo.png" alt="Description" title="Description"  style="width:500px;height:500px;">
+		</article>
+	   	<ul>
+            <li>Na aba "Nós" criar o nó "Cadastro de Contatos" 
+              <ul>
+                <li>Posicionado entre o nó "Início" e o nó "Término";</li>
+                <li>Criar a tarefa "Cadastro de Contatos" e atribuir  à raia "Secretaria";</li>
+                <li>Obs: isso irá garantir que ao abrir a tarefa o processo apareça na caixa dos interessados.</li>
+				<li>Gravar;</li>
+              </ul>
+            </li>
+		</ul>
+	</article>
+ 
+  </slide>
+  
+  <slide>
     <hgroup>
       <h2>Criação do subprocesso:</h2>
     </hgroup>
     <article>
 			<ul>
-			<article class="build"> 
-            <li>Na aba "Nós" criar o nó "Cadastro Contatos" 
-              <ul>
-                <li>Posicionado entre o nó "Início" e o nó "Término";</li>
-                <li>Criar a tarefa "Cadastrar Contatos" e atribuir  à raia "secretaria";</li>
-                <li>Obs: isso irá garantir que ao abrir a tarefa o processo apareça na caixa dos interessados.</li>
-				<li>Gravar;</li>
-              </ul>
-            </li>
-			</article>
           <article class="build"> 
+			<li> Na aba "Nós" escolher o nó "Cadastro de Contatos"</li>
             <li>Criar a variável "Processo_Fluxo_visualizarDecisao"  com o tipo frame;
               <ul>
                 <li>Obs: isso refletirá a inclusão do arquivo "/Processo/Fluxo/visualizarDecisao.xhtml" que exibe as decisões proferidas no processo (se houver).</li>
@@ -126,169 +166,236 @@
           </article>
           </ul>
     </article>
+	<article class="build">
+          <img src="images/fluxo_nos_frame.png" alt="Description" title="Description" >
+       </article>
   </slide>
+  
 <slide>
     <hgroup>
          <h2>Criação do subprocesso:</h2>
     </hgroup>
-			
-			<article class="build"> 
+	
+	<article class="build"> 
 			<ul>
-            <li>Na caixa “Eventos”, evento "Entrar no nó", criar uma ação com a seguinte EL:
-			<ul>
+            <li>Na caixa “Eventos”, evento "Entrar no nó", criar uma ação com a seguinte EL:</li>
 			<li>#{taskInstanceUtil.setFrameDefaultTransition('Término')}</li>
-			<li>Obs: isso irá garantir que não haja transição automática para o nó de desvio caso este seja o primeiro da lista.</li>
+			<li>Obs: isso irá garantir que não haja transição automática<br/> para o nó de desvio caso este seja o primeiro da lista.</li>
 			<li>Marcar para ocultar as transições para os nós de desvio;</li>
 			<li>Gravar e Publicar</li>
 			</ul>
+    </article> 
+    <article class="build">
+          <img src="images/fluxo_nos_evento.png" alt="Description" title="Description" >
+       </article>
+  </slide>
+  
+  
+<slide>
+    <hgroup>
+      <h2>Criação do subprocesso:</h2>
+    </hgroup> 
+	 <article class="build">
+			<ul>
+			<li>Na aba "Propriedades" editar raia "Nó de Desvio - TreinamentoCJF" adicionando:</li>
+            <li>Direção de secretaria -> Diretor de Secretaria
+              <ul>
+                <li>Obs: isso irá garantir que na ação "chamar à ordem" o processo apareça na caixa do diretor.</li>
+              </ul>
             </li>
-			</ul>
-          </article> 
-          
-       <article class="build">
-          <img src="images/menu-sistjweb.png" alt="Description" title="Description"  style="align:center;width:700px;height:500px;">
+          </ul>
+    </article>
+    <article class="build">
+          <img src="images/raias_no_desvio.png" alt="Description" title="Description" >
        </article>
-  </slide>
-<slide>
-    <hgroup>
-      <h2>Como fazer (Menu universal)</h2>
-    </hgroup>
-       <article style="align: center;">
+       <!--article style="align: center;">
         <iframe src="components/tjdft-botao-menu-sistemas/" style="height:500px;"></iframe>
-       </article>
+       </article-->
   </slide>
-<slide>
-    <hgroup>
-      <h2>Como fazer (Barra universal)</h2>
-    </hgroup>
-       <article style="align: center;">
-        <iframe src="components/tjdft-menu/" style="height:500px;"></iframe>
-       </article>
-  </slide>
+  
   <slide>
     <hgroup>
-      <h2>Como fazer (Barra universal - Intranet)</h2>
-    </hgroup>
-       <article style="align: center;">
-        <iframe src="components/tjdft-menu/intranet.html" style="height:500px;"></iframe>
+      <h2>Criação do subprocesso:</h2>
+    </hgroup> 
+	 <article class="build">
+		<ul>
+			<li>Na aba "Nós" clicar no nó de desvio "Nó de Desvio – Treinamento CJF" (veja que ele foi criado por padrão).</li>
+            <li>Ocultar as transições de entrada e atribuir a raia "Nó de Desvio – TreinamentoCJF" à tarefa padrão ("Nó de Desvio – TreinamentoCJF").</li>
+            <li>Marcar as opções de transição (para qual tarefa poderá ser enviado o processo).</li>
+            <li>Gravar e publicar.</li>
+         </ul>
+    </article>
+    <article class="build">
+          <img src="images/fluxo_nos_desvio.png" alt="Description" title="Description" >
        </article>
   </slide>
-  <slide>
-    <hgroup>
-      <h2>Como fazer (Barra universal - Certidão)</h2>
-    </hgroup>
-       <article style="align: center;">
-        <iframe src="components/tjdft-menu/certidao.html" style="height:500px;"></iframe>
-       </article>
-  </slide>
-  <slide>
-    <hgroup>
-      <h2>Como fazer (Menu universal - Cartões de Notificação)</h2>
-    </hgroup>
-       <article class="flexbox vcenter auto-fadein">
-          <img src="images/Cartao.png" alt="Description" title="Description"  style="align:center">
-       </article>     
-  </slide>
+  
     <slide>
     <hgroup>
-      <h2>Como fazer (Notificações - Ícone categorizador)</h2>
-    </hgroup>
-       <article class="flexbox vcenter auto-fadein">
-          <img src="images/CartaoIdentificadorDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
-       </article>    
-  </slide>
-  <slide>
-    <hgroup>
-      <h2>Como fazer (Notificações - Assunto)</h2>
-    </hgroup>
-       <article class="flexbox vcenter auto-fadein">
-          <img src="images/CartaoAssuntoDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
-       </article>    
-  </slide>
-  <slide>
-    <hgroup>
-      <h2>Como fazer (Notificações - Detalhe Assunto)</h2>
-    </hgroup>
-       <article class="flexbox vcenter auto-fadein">
-          <img src="images/CartaoDetalheDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
-       </article>    
-  </slide> 
-  <slide>
-    <hgroup>
-      <h2>Como fazer (Notificações - Ações)</h2>
-    </hgroup>
-       <article class="flexbox vcenter auto-fadein">
-          <img src="images/CartaoBotoesDeAcaoDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
-       </article>    
-  </slide>
-  <slide>
-    <aside class="note">
-  <section>
-  <p>Comunicação por cores, texto e aspecto</p>
-  </section>
-</aside>
-    <hgroup>
-      <h2>Como fazer (Notificações - Cores)</h2>
-    </hgroup>
-    <article style="float:left">
-     <ul>
-          <li class="red3">Atenção imediata</li>
-          <li class="yellow">Alerta</li>
-           <li class="blue3">Pessoal</li>
-          <li class="green2">Finanças</li>
-        </ul>
-      </article>
-      <br>
-       <article class="flexbox fauto-fadein">
-          <img src="images/CartaoCoresDaNotificacao.png" alt="Description" title="Description"  style="align:center;">
-       </article>    
-  </slide>
-  <slide>
-    <hgroup>
-      <h2>Integração horizontal</h2>
-    </hgroup>
-    <article>
-      
-       <article style="float: right;">
-          <img src="images/user-experience.jpg" alt="Description" title="Description"  style="width:500px;height:500px;">
-       </article>
-          <ul>
-                <li>serviços, dados e objetos na mesma camada;</li>
-                <li>abstração de bibliotecas e versões;</li>
-                <li>deploys automágicos.</li>
-          </ul>
-
- <!-- http://blogs-images.forbes.com/steveolenski/files/2014/11/user-experience.jpg -->
+      <h2>Vinculação do subprocesso ao processo principal:</h2>
+    </hgroup> 
+	 <article class="build">
+		<ul>
+			<li>No fluxo principal ("Fluxo básico do 1º Grau") criar um nó do tipo "subProcesso" chamado "Treinamento";</li>
+            <li>Selecionar o fluxo (subprocesso) "TreinamentoCJF" na combo;</li>
+            <li>Gravar.</li>
+         </ul>
     </article>
+    <article class="build">
+          <img src="images/fluxo_principal.png" alt="Description" title="Description" >
+       </article>
   </slide>
+  
    <slide>
-    
     <hgroup>
-      <h2>Webcomponents</h2>
-    </hgroup>
+      <h2>Vinculação do subprocesso ao processo principal:</h2>
+    </hgroup> 
+	 <article>
+		<ul>
+			<li>No nó (subprocesso) "Treinamento" definir as transições de entrada e saída para o nó "Triagem";</li>
+            <li><ul><li>Obs: isso permitirá o retorno para o nó “Triagem” após o encerramento do subprocesso.</li></ul></li>
+            <li>Gravar e Publicar.</li>
+         </ul>
+    </article>
     <article>
-      
-       <article style="float: right;">
-          <img src="http://frontend-labs.com/wp-content/uploads/2014/07/WebComponentsPolymer.png" alt="Description" title="Description"  style="width:500px;height:400px;">
+          <img src="images/fluxo_principal.png" alt="Description" title="Description" >
        </article>
-          <ul>
-                <li>Custom Elements;</li>
-                <li>HTML Templates;
-                <ul>
-                  <li>Interte até ser ativado</li>
-                  <li>Conteúdos não sofrerão carga(imagens,vídeos,áudio)</li>
-                  <li>Conteúdo não considerado como sendo do documento</li>
-                  <li>Podem ser inseridos em qualquer lugar</li>
-                </ul>
-
-                </li>
-                <li>Shadow DOM(árvores combinadas);</li>
-                <li>HTML Imports</li>
+  </slide>
+  
+<slide>
+    <hgroup>
+      <h2>Teste:</h2>
+    </hgroup> 
+	 <article>
+			<ul>
+          <article class="build"> 
+            <li>Caso não haja processo na caixa "Triagem"  para teste:
+              <ul>
+                <li>Protocolar um processo e verificar o órgão julgador ao qual foi distribuído;</li>
+				<li>Logar com um usuário com perfil de "Diretor de secretaria" pertencente ao órgão ao qual o processo foi distribuído;</li>
+				<li>Selecionar o processo na caixa "Triagem", abrir a tarefa e tentar transitar para a tarefa "Treinamento";</li>
+				<li>Selecionar “Término”.</li>
+              </ul>
+            </li>
+          </article>
           </ul>
-
- <!-- http://blogs-images.forbes.com/steveolenski/files/2014/11/user-experience.jpg -->
+    </article>
+    <article class="build">
+          <img src="images/fluxo_teste.png" alt="Description" title="Description" >
+       </article>
+  </slide>
+  
+   <slide>
+    <hgroup>
+      <h2>Teste:</h2>
+    </hgroup>
+        <video controls autoplay class="Video1">
+		<source src="videos/teste_fluxo1.mp4" type="video/mp4">
+		This browser or mode doesn't support HTML5 video.
+		</video> 
+  </slide>
+  
+<slide>
+    <hgroup>
+      <h2>Preparação para o CRUD</h2>
+    </hgroup>
+       <article>
+			<ul>
+          <article class="build"> 
+            <li>Editar o Nó "Cadastro de Contatos" do fluxo "TreinamentoCJF"
+              <ul>
+                <li>Mudar a variável "frame" para "AATreinamentoCJF_frame_cadastroContatos"<br/>(será o frame do nosso CRUD);</li>
+				<li>Salvar e Publicar;</li>
+				<li>Tentar abrir a tarefa;</li>
+              </ul>
+            </li>
+			<li>Obs: deverá dar erro pois não criamos o frame ainda.</li>
+          </article>
+          </ul>
     </article>
   </slide>
+  
+  
+  <slide>
+    <hgroup>
+      <h2>Se o processo sumir?</h2>
+    </hgroup>
+      <article class="flexbox vcenter auto-fadein">
+			<ul>
+          <article> 
+            <li>Tentar recolocá-lo na tarefa correta utilizando a opção "Chamar à ordem".
+              <ul>
+                <li>Procure o número do processo na aba "Últimas tarefas realizadas" e copie.</li>
+				<li>No menu "Processo->Outras ações->Chamar à ordem", aba "Formulário", <br/>cole o número do processo (não esqueça de clicar na opção sugerida), digite um texto e clique em "Incluir". </li>
+              </ul>
+            </li>
+			</article>
+          </ul>
+		<article>
+         <img src="images/chamar_a_ordem.png" >
+       </article>
+    </article>
+  </slide>
+  
+    <slide>
+    <hgroup>
+      <h2>Se o processo sumir?</h2>
+    </hgroup>
+      <article class="flexbox vcenter auto-fadein">
+			<ul>
+		   <article>
+		   <li>Obs: como definimos que o perfil da raia "Nó de desvio – TreinamentoCJF" <br/>é somente "Diretor de Secretaria" apenas usuários com este perfil irão ver o processo na caixa "Nó de desvio – TreinamentoCJF".</li>
+			<li>Ao abrir a tarefa que está no nó de desvio irão aparecer as opções de transição que foram definidas para o nó. </li>
+		   </article>
+          </ul>
+		<article >
+         <img src="images/chamar_a_ordem.png" >
+       </article>
+    </article>
+  </slide>
+  
+    <slide>
+    <hgroup>
+      <h2>Chamar à ordem:</h2>
+    </hgroup>
+        <video controls autoplay class="Video1">
+		<source src="videos/Chamar_a_ordem.mp4" type="video/mp4">
+		This browser or mode doesn't support HTML5 video.
+		</video> 
+  </slide>
+  
+      <slide>
+    <hgroup>
+      <h2>Se seu usuário não possuir a localização do processo?</h2>
+    </hgroup>
+      <article class="flexbox vcenter auto-fadein">
+			<ul>
+		   <li>Adicionar uma localização ao seu usuário:
+		   <ul>
+		   <li>Logar como Administrador; </li>
+			<li>Selecionar o memu "Configuração->Pessoa->Servidor"; </li>
+			<li>Fazer uma busca pelo nome do usuário; </li>
+			<li>Clicar em "Editar"(Bob Esponja); </li>
+			<li>Na aba "Localização" vincular a localização ao papel; </li>
+			<li>Na aba "Visibilidade" liberar  a visualização a partir da data atual (pode ser anterior); </li>
+			<li>Fazer Logoff e Logon para recarregar os acessos. </li>
+			</ul>
+			</li>
+          </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Adicionar uma localização ao seu usuário:</h2>
+    </hgroup>
+        <video controls autoplay class="Video1">
+		<source src="videos/adicionar_localizacao.mp4" type="video/mp4">
+		This browser or mode doesn't support HTML5 video.
+		</video> 
+  </slide>
+
+   
    <slide>
     
     <hgroup>
@@ -323,7 +430,7 @@
   <slide class="thank-you-slide segue nobackground">
     <aside class="gdbar right"><img src="images/Logo_cjf.png"></aside>
     <article class="flexbox vleft auto-fadein">
-      <h2>&lt;Obrigado!&gt;</h2>
+      <h2>Obrigado!</h2>
       <p>Informações de contato.</p>
     </article>
     <p class="auto-fadein" data-config-contact>
@@ -331,11 +438,6 @@
     </p>
   </slide>
 
-  <slide class="logoslide dark nobackground">
-    <article class="flexbox vcenter">
-      <span><img src="images/Logo_cjf.png"></span>
-    </article>
-  </slide>
 
   <slide class="backdrop"></slide>
 
