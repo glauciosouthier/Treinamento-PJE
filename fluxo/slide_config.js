@@ -21,7 +21,7 @@ var SLIDE_CONFIG = {
     name: 'Glaucio Southier',
     company: 'CONAC<br>CJF',
     email: 'glaucio.southier@cjf.jus.br',
-	www: 'https://rawgit.com/glauciosouthier/Treinamento-PJE/master/fluxo/template.html',
+	www: 'http://glauciosouthier.github.io/Treinamento-PJE/',
     github: 'http://github.com/glauciosouthier'
 
   }/*, {
