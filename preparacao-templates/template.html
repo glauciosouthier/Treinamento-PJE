@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"> 
+  <base target="_blank"> 
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+    <style type="text/css">  
+#backImgSlideFlow {
+	background-image: url(images/BPMN-2.0-SIMLE-Class-Example.jpg);
+ }	
+.noBullet ul > li:before {
+  content: none;
+}
+.Video1
+    {
+     position:absolute;
+     top: 90px;
+     left:0px;        
+     width:100%;       
+     border:2px solid blue;
+     display:block;
+     z-index:99;
+     }
+    </style>
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+<aside class="note">
+	<section>
+  <p>Clicar <code><a href="?presentme=true" target="_self">?presentme=true</a></code> Para ativar o modo de apresentação</p>
+      <p>Alterar <code><a href="?presentme=false" target="_self">?presentme=false</a></code> Para desabilitar.</p>
+	</section>
+</aside>
+    <article class="flexbox vcenter">
+      <span><img src="images/Logo_cjf.png" style="width:500px;height:500px;"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/Logo_cjf.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2 class="green">Agenda</h2>
+    </hgroup>
+
+	<article>
+	 <h3 class="green">Preparação dos templates com Facelets</h3>
+	</article>
+  </slide>
+
+  
+     <slide>
+    <hgroup>
+      <h2 class="green">Facelets</h2>
+    </hgroup>
+	<article>
+          <ul>
+          	<li>O PJE utiliza as tecnologias Facelets e JSF para criação das views;</li>
+            <li>Facelets permite modularização das views;</li>
+            <li>Ex: template.xhtml</li>
+          </ul>
+	 <pre class="prettyprint "  style="font-size: 20px;line-height: 22px;"  data-lang="template">
+	 &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+      		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	&lt;html xmlns="http://www.w3.org/1999/xhtml" 
+			 xmlns:ui="http://java.sun.com/jsf/facelets">
+	&lt;body>     
+	&lt;div id="header"> &lt;ui:include src="header.xhtml"/> &lt;/div>
+	&lt;div id="menu">
+	&lt;ui:include src="menu.xhtml">
+		        			&lt;ui:param name="projectName" value="#{nomeSistema}"/>
+	&lt;/ui:include>&lt;/div>
+	&lt;div id="pageBody">
+			&lt;ui:insert name="content">&lt;ui:include src="content.xhtml"/>&lt;/ui:insert> 
+	&lt;/div>
+	&lt;div id="footer"> &lt;ui:include src="footer.xhtml"/> &lt;/div>
+	&lt;/body> &lt;/html></pre>
+    </article>
+
+  </slide>
+  
+       <slide>
+    <hgroup>
+      <h2 class="green">Facelets</h2>
+    </hgroup>
+	<article>
+   	<p>No exemplo temos um template xhtml que inclui:</p>
+ 	<ul>
+            <li>um cabeçalho (header.xhtml);</li>
+            <li>um menu (menu.xhtml) passando o nome do sistema como parâmetro;</li>
+            <li>uma área de conteúdo (content.xhtml);</li>
+            <li>um rodapé (footer.xhtml);</li>
+     </ul>
+    </article>
+	<article>
+          <img src="images/layout.gif" alt="layout" title="layout"  >
+       </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2 class="green">Facelets</h2>
+    </hgroup>
+	<article>
+   	<p>Podemos refefinir as áreas envoltas com ui:insert no arquivo que usar o template:</p>
+ 	 <pre class="prettyprint" >
+	&lt;?xml version="1.0" encoding="ISO-8859-1"?>
+	&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+			xmlns:ui="http://java.sun.com/jsf/facelets"
+			template="template.xhtml">
+	&lt;ui:define name="content"> 
+	&lt;ui:include src="content2.xhtml"/>
+	&lt;/ui:define>
+	&lt;/ui:composition></pre>
+    </article>
+	<article>
+         <p>No template tinhamos: &lt;ui:insert name="content">...&lt;/ui:insert></p>
+         <p>No componente temos: &lt;ui:define name="content"> ...&lt;/ui:define></p>
+    </article>
+  </slide>
+  
+  
+   <slide>
+    <hgroup>
+      <h2 class="green">Facelets</h2>
+    </hgroup>
+	<article>
+   	<p>As partes de uma composição usam  ui:fragment</p>
+   	<p>Ex: menu.xhtml</p>
+ 	 <pre class="prettyprint" >
+&lt;?xml version="1.0" encoding="ISO-8859-1"?>
+&lt;ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html">
+&lt;h:form>  
+    &lt;ul>  
+      &lt;li>  
+        &lt;h:commandLink action="fornecedores">Fornecedores &lt;/h:commandLink>
+      &lt;/li>
+      ...
+    &lt;/ul>
+  &lt;/h:form>
+&lt;/ui:fragment></pre>
+    </article>
+  </slide>
+
+
+ <slide>
+    <hgroup>
+      <h2 class="green">Facelets</h2>
+    </hgroup>
+	<article>
+   	<p>Podemos usar templates em áreas específicas com ui:decorate</p>
+ 	 <pre class="prettyprint" >
+	&lt;?xml version="1.0" encoding="ISO-8859-1"?>
+	&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+			xmlns:ui="http://java.sun.com/jsf/facelets"
+			template="template.xhtml">
+	&lt;ui:define name="content"> 
+	    &lt;ui:decorate template="/WEB-INF/xhtml/components/templates/edit.xhtml">
+	        &lt;ui:include src="content2.xhtml"/>
+	    &lt;/ui:decorate>
+	&lt;/ui:define>
+	&lt;/ui:composition></pre>
+    </article>
+	<article>
+         <p>O template edit.xhtml envolve os componentes com uma div com estilos e comportamentos específicos para formulários</p>
+    </article>
+  </slide>
+  
+    <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+    <article>
+    <p>Criar um branch para o curso</p>
+          <ul>
+                <li>clique com o botão direito sobre o projeto "pje" e escolha:
+					<ul><li>Team-> Switch To-> New Branch</li></ul>
+				</li>
+				 <li>Digite o nome para o Branch:
+					<ul><li>PJE-1.6.x-treinamento</li></ul>
+				</li>
+				<li>Finish.</li>
+          </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+    <article>
+          <ul>
+                <li>No projeto pje-web, src/main/webapp,  criar a pasta "AATreinamentoCJF";
+					<ul><li>obs: o "AA" é para a pasta ficar no topo e facilitar a localização.</li></ul>
+				</li>
+                <li>Dentro da pasta "AATreinamentoCJF" criar as subpastas "form", "frame" e "template";
+                <ul><li>obs: os nomes das pastas são de livre escolha, apenas estamos seguindo o padrão do sistema.</li></ul>
+                </li>
+                <li>Na pasta "form" criar o arquivo "formCadastroContatos.xhtml";</li>
+                <li>Na pasta "template" copiar e colar o arquivo "treinamentoTemplate.xhtml" fornecido no material;</li>
+				<li>Na pasta "frame" criar os arquivos "cadastroContatos.xhtml" e "cadastroContatos.page.xml";</li>
+          </ul>
+    </article>
+    <article>
+     <p>Obs: a variável “AATreinamentoCJF_frame_cadastroContos” definida no fluxo reflete a inclusão do arquivo “/AATreinamentoCJF/frame/cadastroContatos.xhtml”.</p>
+    </article>
+  </slide>
+  
+    <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+    <article>
+          <p>Devemos ter essa estrutura:</p>
+    </article>
+    <article>
+          <img src="images/estrutura_pastas.png" alt="Description" title="Description"  >
+       </article>
+  </slide>
+
+  
+  <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+	<article>
+   	<p>No arquivo cadastroContatos.xhtml  usar o seguinte conteúdo básico:</p>
+ 	 <pre class="prettyprint" style="font-size: 18px;line-height: 20px;" data-lang="xhtml">
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:wi="http://www.itx.com.br/jsf"
+ 	 xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="/WEB-INF/xhtml/templates/frameTemplate.xhtml">
+	&lt;ui:param name="pageTitle" value="Cadastro de  Contatos" />
+	&lt;ui:define name="title" value="#{pageTitle}" />
+	&lt;ui:param name="showMenu" value="false" />
+&lt;ui:define name="frameBody">
+		&lt;rich:jQuery query="hide()" selector="#update" timing="onload" />
+		&lt;ui:include src="/Processo/Fluxo/cssFluxo.xhtml" />
+			&lt;h:outputText value="Teste blá blá blá" />
+&lt;/ui:define>
+&lt;/ui:composition></pre>
+    </article>
+  </slide>
+  
+  
+  <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+	<article>
+   	<p>A tag &lt;rich:jQuery query="hide()"...> esconde o botão gravar do fluxo.</p>
+   	<p>O conteúdo definido em &lt;ui:define name="frameBody"> é incluído no template frameTemplate.xhtml com a tag &lt;ui:insert name="frameBody" />.</p>
+    </article>
+  </slide>
+ 
+ <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+	<article>
+   	<p>No arquivo cadastroContatos.page.xml usar o seguinte conteúdo básico:</p>
+ 	 <pre class="prettyprint"  style="font-size: 18px;line-height: 20px;" data-lang="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;page   xmlns="http://jboss.com/products/seam/pages"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages
+	http://jboss.com/products/seam/pages-2.2.xsd"
+	login-required="true">
+&lt;restrict>#{security.checkPage()}&lt;/restrict>
+&lt;begin-conversation join="true"/>
+&lt;/page></pre>
+    </article>
+     <article>
+          <ul>
+				<li>No Eclipse:
+				<ul>
+				<li>dar clean no projeto;</li>
+				<li>dar clean no servidor jboss;</li>
+				<li>excluir “work”, “temp” e “data” no servidor;</li>
+				<li>executar start no servidor;</li>
+				</ul>
+				</li>
+				<li>Testar a aplicação.</li>
+          </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+     <article>
+          <ul>
+				<li>Tentar acessar o arquivo diretamente (http://localhost:8080/pje-web/AATreinamentoCJF/frame/cadastroContatos.seam).
+				</li>
+				<li>Comentar &lt;restrict>#{security.checkPage()}&lt;/restrict> , reiniciar o servidor e testar novamente.</li>
+				<li>Obs:
+				<ul>
+				<li>Os arquivos “.page.xml” são carregados quando se acessa o arquivo xhtml com o sufixo “.seam” pela url.</li>
+				<li>Mesmo quando o arquivo xhtml é incluído em outro o arquivo “.page.xml”  deve ser  criado por questão de segurança.</li>
+				</ul>
+				</li>
+          </ul>
+    </article>
+  </slide>  
+  
+ <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+	<article>
+   	<p>No arquivo “cadastroContatos.xhtml” incluir o arquivo “formCadastroContatos.xhtml”:</p>
+ 	 <pre class="prettyprint"  style="font-size: 18px;line-height: 20px;" data-lang="xhtml">
+&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://richfaces.org/a4j" 
+	xmlns:wi="http://www.itx.com.br/jsf"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="/WEB-INF/xhtml/templates/frameTemplate.xhtml">
+
+	&lt;ui:param name="pageTitle" value="Cadastro de  Contatos" />
+	&lt;ui:define name="title" value="#{pageTitle}" />
+	&lt;ui:param name="showMenu" value="false" />
+&lt;ui:define name="frameBody">
+	&lt;rich:jQuery query="hide()" selector="#update" timing="onload" />
+	&lt;ui:include src="/Processo/Fluxo/cssFluxo.xhtml" />
+	&lt;ui:include src="/AATreinamentoCJF/form/formCadastroContatos.xhtml" />
+&lt;/ui:define>
+&lt;/ui:composition></pre>
+    </article>
+  </slide>
+  
+  
+  <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+	<article>
+   	<p>Agora alteraremos nosso arquivo “formCadastroContatos.xhtml” para usar o template  “treinamentoTemplate.xhtml”.</p>
+ 	 <pre class="prettyprint"  style="font-size: 18px;line-height: 20px;" data-lang="xhtml">
+&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:wi="http://www.itx.com.br/jsf"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/AATreinamentoCJF/template/treinamentoTemplate.xhtml">
+&lt;ui:define name="searchGrid">
+			&lt;!--Conteúdo do campo busca -->&lt;h:outputText value="Teste grid" />
+&lt;/ui:define>
+&lt;ui:define name="form">
+		&lt;!--Conteúdo do formulário -->&lt;h:outputText value="Teste form" />
+&lt;/ui:define>
+&lt;ui:define name="tabs">
+		&lt;!--Conteúdo das tabs adicionais -->&lt;h:outputText value="Teste tabs" />
+&lt;/ui:define>
+&lt;/ui:composition></pre>
+    </article>
+  </slide>
+
+ <slide>
+    <hgroup>
+      <h2>Criação da estrutura do CRUD:</h2>
+    </hgroup>
+    <article>
+      <p>No arquixo <b>treinamentoTemplate.xhtml</b> foram definidas três áreas principais:</p>
+    <p>
+       <ul>
+				<li><b>searchGrid,</b> onde criaremos o painel de busca (lateral esquerda);</li>
+				<li><b>form,</b> onde incluiremos o formulário (aba formulário), e</li>
+				<li><b>tabs,</b> onde podemos incluir outras abas (opcional).</li>
+		</ul>
+	</p>
+	 <p>Testar novamente.</p>
+    </article>
+  </slide>
+  
+  <!--  
+   <slide>
+    
+    <hgroup>
+      <h2>Webcomponents - exemplo</h2>
+    </hgroup>
+    <article>
+       <pre class="prettyprint " data-lang="java">
+ 
+      </pre>
+    </article>
+  <section>
+  <p>Clicar <code><a href="#" target="_new">ShowCase</a></code></p>
+  </section>
+
+  </slide>--> 
+
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/Logo_cjf.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>Pausa!</h2>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"> 
+  <base target="_blank"> 
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+    <style type="text/css">  
+#backImgSlideFlow {
+	background-image: url(images/BPMN-2.0-SIMLE-Class-Example.jpg);
+ }	
+.noBullet ul > li:before {
+  content: none;
+}
+.Video1
+    {
+     position:absolute;
+     top: 90px;
+     left:0px;        
+     width:100%;       
+     border:2px solid blue;
+     display:block;
+     z-index:99;
+     }
+    </style>
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+<aside class="note">
+	<section>
+  <p>Clicar <code><a href="?presentme=true" target="_self">?presentme=true</a></code> Para ativar o modo de apresentação</p>
+      <p>Alterar <code><a href="?presentme=false" target="_self">?presentme=false</a></code> Para desabilitar.</p>
+	</section>
+</aside>
+    <article class="flexbox vcenter">
+      <span><img src="images/Logo_cjf.png" style="width:500px;height:500px;"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/Logo_cjf.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2 >Agenda</h2>
+    </hgroup>
+
+	<article>
+
+   <ul>
+    <li>Construção de um CRUD na arquitetura antiga;</li>
+    </ul>
+	</article>
+  </slide>
+
+  <!--slide class="fill nobackground" id="backImgSlideFlow"-->
+   <slide>
+    <hgroup>
+      <h2 class="green">JSF</h2>
+    </hgroup>
+	<article>
+          <ul>
+            <li>O PJE utiliza a tecnologia JSF para criação das views;</li>
+            <li>As tags com prefixo "wi" são customizadas;</li>
+			<li></li>
+            <li>ex: </li>
+          </ul>
+	 <pre class="prettyprint " data-lang="datagrid">
+	 &lt;wi:datagrid/>
+	  em: pje-web/src/main/webapp/WEB-INF/xhtml/tags/grid/datagrid.xhtml
+	 </pre>
+    </article>
+
+  </slide>
+  
+    
+  
+  <!--  
+   <slide>
+    
+    <hgroup>
+      <h2>Webcomponents - exemplo</h2>
+    </hgroup>
+    <article>
+       <pre class="prettyprint " data-lang="java">
+ 
+      </pre>
+    </article>
+  <section>
+  <p>Clicar <code><a href="#" target="_new">ShowCase</a></code></p>
+  </section>
+
+  </slide>--> 
+
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/Logo_cjf.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>Pausa!</h2>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
